@@ -1,0 +1,14 @@
+a:hover {
+    text-decoration: none;
+}
+.extra-large {
+    font-size: 400%;
+}
+.center-div{
+    /* magic is in the min-* */
+    min-height: 100vh;
+    min-width: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: rgb(243, 230, 196);
+}
