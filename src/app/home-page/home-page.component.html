@@ -1,3 +1,32 @@
-<p>
-  home-page works!
-</p>
+
+<div class="container-fluid">
+  <div class="row">
+    
+    <!-- left section: logo and about -->
+    <div class="col-md-7 d-none d-sm-flex center-div bg-black">    
+
+            <div class="col-md-10 center-inner-div">
+                <h1 class="display-4">SaySomething</h1>
+
+                <img *ngIf="media=='image'" class="img img-fluid" [src]=mediaUrl>
+                <iframe *ngIf="media=='video'" width="560" height="315" [src]=mediaUrl frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                <div class="text-info">{{mediaTitle}}</div>
+                <div *ngIf="mediaTitle!=''" class="text-info">Astronomy Picture of the Day by <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank" rel="noopener">NASA</a></div>
+          </div>
+    </div>
+
+    <!-- right section: register or login -->
+    <div class="col-md-5 d-sm-flex center-div bg-light">
+            <div class="col-md-8 center-inner-div py-5">
+                  <h1 class="display-4 text-center pb-3">Welcome</h1>
+                  <h4 class="mt-2">Not a member?</h4>
+                  <a id="option_register" class="btn btn-primary btn-lg btn-block" routerLink="/register" routerLinkActive="active">Register</a>
+                  <h4>Already have an account?</h4>
+                  <a id="option_login" class="btn btn-secondary btn-lg btn-block" routerLink="/login" routerLinkActive="active">Login</a>
+
+                  <a class="nav-link text-secondary text-center mt-2" routerLink="/about" routerLinkActive="active">About App</a>
+            </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,62 @@
+
+<div class="container-fluid">    
+    <div class="row justify-content-md-center bg-black"> 
+        <div class="col-md-auto d-sm-flex center-div bg-light">
+            <div class="col-md-8 center-inner-div py-5">
+
+                <h1 class="text-center pb-3">Join and SaySomething</h1>
+
+                <form role="register" (submit)="check()">
+            <div class="form-group row">
+                <div class="col">
+
+                    <div class="input-group">
+                        <input type="text" name="username" [(ngModel)]="username" class="form-control" placeholder="Pick a Username" autofocus autocomplete="username" 
+                            required minlength="4" aria-label="Username" aria-describedby="usernameHelpBlock" >
+                        <div class="input-group-append" *ngIf="ready==true">
+                            <span class="input-group-text"><i class="fa" [ngClass]="{'fa-check': ready===true}" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    
+                        <small id="usernameHelpBlock" class="form-text text-muted">
+                            Your username must be 4-12 characters long.
+                        </small>
+                    
+                </div>
+            </div>
+            <div *ngIf="ready==true" class="form-group row">
+                <div class="col">
+
+                      <div class="input-group">
+                        <input [type]="show ? 'text' : 'password'" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" autocomplete="current-password" 
+                            required minlength="4" aria-label="Password" aria-describedby="passwordHelpBlock">
+                            <div class="input-group-append">
+                                <span class="input-group-text" (click)="show=!show;"><i class="fa" [ngClass]="show ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i></span>
+                            </div>
+                      </div>
+
+                      <small id="passwordHelpBlock" class="form-text text-muted">
+                      Your password must be 4-12 characters long.
+                      </small>
+                          
+                </div>
+            </div>
+
+            
+            <div class="info-box" *ngIf="error_message!=''">{{error_message}}</div>
+
+
+            <div class="form-group row">
+                <div class="col">
+                    <button type="submit" id="next-btn" class="btn btn-primary btn-lg btn-block">{{button_message}}</button>
+                </div>
+            </div>
+
+            
+                </form>
+
+                <a class="nav-link text-secondary text-center mt-2" routerLink="/about" routerLinkActive="active">About App</a>
+            </div>
+        </div>
+    </div>
+</div>

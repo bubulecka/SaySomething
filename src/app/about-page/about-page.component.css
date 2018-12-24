@@ -1,0 +1,9 @@
+.center-div{
+    /* magic is in the min-* */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.bg-black{
+    background-color: black;
+}
