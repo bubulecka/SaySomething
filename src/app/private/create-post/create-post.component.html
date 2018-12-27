@@ -4,7 +4,7 @@
     <textarea class="form-control p-2" style="resize:none" [(ngModel)]="newpost" name="newpost" rows="5" cols="50" maxlength="255" placeholder="Say something..."></textarea>
     </div>
     <div>
-      <label class="mr-auto"> {{ newpost.length}}/255</label>
+      <label class="mr-auto text-white-50"> {{ newpost.length}}/255</label>
       <button type="submit" class="btn btn-secondary float-right" (click)="check()">SayIt?</button>
   </div>
 </form>
