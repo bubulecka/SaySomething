@@ -1,0 +1,28 @@
+<div class="p-2 shadow" style="background-color: rgba(40,40,40)">
+<a class="navbar-link text-white" routerLink="" skipLocationChange><span class="fa fa-arrow-left"></span>  Back</a> <!-- this way it forces the router to reload and call ngOnInit() -->
+<h2 class="display-4 text-center text-white-50" *ngIf="posts">Posts By {{posts.data.creator_name}}</h2>
+<div *ngIf="posts">
+    <h2 *ngIf="posts.data.posts.length==0" class="display-4 text-center text-white-50">None yet.</h2>
+    <!-- card start -->
+    <div class="card mb-2" *ngFor="let post of posts.data.posts">
+        <div class="card-body ml-2">
+      
+            <div class="row">
+                <img *ngIf="posts.data.creator_logo else anon" class="img-responsive inline" [src]=posts.data.creator_logo width="80" height="80" alt="User Icon" />
+                <ng-template #anon>
+                  <img class="img-responsive inline" src="../../assets/img/anon.svg" width="80" height="80" alt="Unknown Icon" />
+                </ng-template>
+                <div class="card-title mx-3 px-2">
+                  <h3>@{{posts.data.creator_name}}</h3>
+                  <div class="card-subtitle text-muted">{{post.edited | date:'medium'}}</div>
+                </div>
+            </div>
+
+            <div class="card-text mt-4">{{post.content}}</div>
+        </div>
+        
+        <img *ngIf="post.img_link" class="card-img-bottom p-2" [src]=post.img_link alt="Card image" style="width:100%" />
+    </div>
+    <!-- end of card -->
+</div>
+</div>

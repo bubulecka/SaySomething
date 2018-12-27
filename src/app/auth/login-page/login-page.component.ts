@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     // if logged in, skip this page
-    if (this.authService.getLoggedInState()) this.router.navigate(['']);
+    if (this.authService.getLoggedInState()) this.router.navigate([''], {replaceUrl:true});
   }
 
   check() {

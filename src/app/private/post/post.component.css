@@ -1,0 +1,15 @@
+a:hover{
+    text-decoration: none;
+}
+.info-box {
+    background-blend-mode: darken;
+    background-color: #d1d1d181;
+    /* border: 1px solid red; */
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

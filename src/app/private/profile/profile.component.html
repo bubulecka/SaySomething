@@ -1,0 +1,13 @@
+
+<div class="card text-center mx-auto shadow">
+    <img *ngIf="profile.img_link else anon" class="img img-rounded mx-auto mt-4" [src]=profile.img_link width="80" height="80" alt="User Icon" />
+    <ng-template #anon>
+      <img class="img img-rounded mx-auto mt-4" src="../../assets/img/anon.svg" width="80" height="80" alt="Unknown Icon" />
+    </ng-template>
+
+    <div class="card-body">
+        <h5 class="card-title">Hello, @{{profile.username}}</h5>
+        <p class="card-subtitle text-muted">joined: {{profile.created | date:'mediumDate'}}</p>
+
+    </div>
+</div>

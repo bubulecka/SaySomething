@@ -2,26 +2,46 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthToken } from './auth-token';
 import { AvailableToken } from './available-token';
+import { ProfileToken } from '../private/profile/profile-token';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  cacheProfile(token: AuthToken) {
+    localStorage.setItem("username",token.profile.username);
+    localStorage.setItem("img_link",token.profile.img_link);
+    localStorage.setItem("profile-token",JSON.stringify(token.profile));
+  }
+
+  getCachedProfile(): ProfileToken {
+    return JSON.parse(localStorage.getItem("profile-token"));
+  }
+
+  getUsername(): string {
+    return localStorage.getItem("username");
+  }
+
+  getProfilePic(): string {
+    return localStorage.getItem("img_link");
+  }
+
   getLoggedInState():boolean {
-    console.log("getLoggedInState()");
     return !!localStorage.getItem("auth");
   }
 
   setLoggedInState() {
-    console.log("setLoggedInState()");
     localStorage.setItem("auth", "ok");
   }
 
   removeSessionState() {
-    console.log("removeSessionState()");
-    localStorage.removeItem("auth");
     //localStorage.clear(); // this would clear space data
+    localStorage.removeItem("auth");
+    localStorage.removeItem("username");
+    localStorage.removeItem("img_link");
+    localStorage.removeItem("profile-token");
   }
 
   constructor(private http: HttpClient) { }
@@ -46,12 +66,11 @@ export class AuthService {
             }
           },
           (error) => {
-            console.log("Error in checkAvailableUsername: "+error);
             reject("Something went wrong. Try again?");
           }
         )
         .catch((e: HttpErrorResponse) => {
-          console.log("No connection to the server detected");
+          console.log("No connection to the server detected?");
         });
     });
     return promise;
@@ -70,13 +89,16 @@ export class AuthService {
         .then(
           (response) => {
             let answer = response as AuthToken;
-            if (answer.auth == true) {this.setLoggedInState();}
+            if (answer.auth == true) {
+              this.setLoggedInState();
+              this.cacheProfile(answer);
+            }
             resolve(answer);
           },
-          (error) => {reject(error)}
+          (error) => {reject("Something went wrong. Try again?")}
         )
         .catch((e: HttpErrorResponse) => {
-          console.log("No connection to the server detected");
+          console.log("No connection to the server detected?");
         });
     });
     return promise;
@@ -95,13 +117,16 @@ export class AuthService {
       .then( 
         (response) => {
           let answer = response as AuthToken;
-          if (answer.auth == true) this.setLoggedInState();
+          if (answer.auth == true) {
+            this.setLoggedInState();
+            this.cacheProfile(answer);
+          }
           resolve(answer);
         }, 
-        (error) => {reject(error)}
+        (error) => {reject("Something went wrong. Try again?")}
       )
       .catch((e: HttpErrorResponse) => {
-        console.log("No connection to the server detected");
+        console.log("No connection to the server detected?");
       });
     });
 
@@ -118,17 +143,16 @@ export class AuthService {
       .toPromise()
       .then( 
         (response) => {
-          console.log("logout response: " + JSON.stringify(response));
           var answer = response as AuthToken;
           // there is a problem comparing (answer.auth == false) => false
           // same with (let, var)
           // instead use (answer.auth != true) => true
           resolve(answer.auth);
         },
-        (error) => {reject("Something went wrong")}
+        (error) => {reject("Something went wrong. Try again?")}
       )
       .catch((e: HttpErrorResponse) => {
-        console.log("No connection to the server detected");
+        console.log("No connection to the server detected?");
       });
     });
 

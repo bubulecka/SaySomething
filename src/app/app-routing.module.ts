@@ -4,7 +4,6 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AuthGuard } from './auth/auth.guard';
-import { MainFeedComponent } from './main-feed/main-feed.component';
 import { LogoutPageComponent } from './auth/logout-page/logout-page.component';
 
 const routes: Routes = [
@@ -17,13 +16,9 @@ const routes: Routes = [
     component: HomePageComponent,
     canLoad: [AuthGuard]
   },
-  {
-    path: '',
-    canActivate: [AuthGuard],
-    children: [
-      { path: 'logout', component: LogoutPageComponent },
-      { path: '', component: MainFeedComponent }
-    ]
+  { //TODO check this
+    path: 'logout', 
+    component: LogoutPageComponent 
   },
   {
     path: '**',

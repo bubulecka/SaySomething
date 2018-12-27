@@ -8,10 +8,9 @@ import { AppComponent } from './app.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { MainFeedComponent } from './main-feed/main-feed.component';
 import { AuthModule } from './auth/auth.module';
 import { LogoutPageComponent } from './auth/logout-page/logout-page.component';
-
+import { PrivateModule } from './private/private.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { LogoutPageComponent } from './auth/logout-page/logout-page.component';
     AboutPageComponent,
     NotFoundPageComponent,
     HomePageComponent,
-    MainFeedComponent,
     LogoutPageComponent
   ],
   imports: [
@@ -27,6 +25,7 @@ import { LogoutPageComponent } from './auth/logout-page/logout-page.component';
     FormsModule,
     HttpClientModule,
     AuthModule,
+    PrivateModule,
     AppRoutingModule,
   ],
   providers: [],

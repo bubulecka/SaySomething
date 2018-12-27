@@ -13,11 +13,9 @@ export class LogoutPageComponent implements OnInit {
 
   ngOnInit() {
     this.authService.doLogout().then((response) => {
-      console.log("logged out. redirecting to login");
       this.router.navigate(['login']);
     }, (error) => {
-      console.log("error while logging out");
-      this.router.navigate(['']);
+      this.router.navigate([''], {replaceUrl: true});
     });
   }
 

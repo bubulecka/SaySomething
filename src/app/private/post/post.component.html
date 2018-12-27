@@ -1,0 +1,25 @@
+<div class="info-box" *ngIf="message!=''">{{message}}</div>
+<div *ngFor="let post of posts" class="shadow">
+    <!-- card start -->
+    <div class="card my-2">
+        <div class="card-body">
+      
+            <div class="row pl-2">
+                <img *ngIf="post.creator_logo else anon" class="img-responsive inline" [src]=post.creator_logo width="80" height="80" alt="User Icon" />
+                <ng-template #anon>
+                    <img class="img-responsive inline" src="../../assets/img/anon.svg" width="80" height="80" alt="Unknown Icon" />
+                  </ng-template>
+                <div class="card-title mx-3 px-2">
+                  <h5><a class="text-primary" routerLink="/user/{{post.creator_name}}" skipLocationChange>@{{post.creator_name}}</a></h5>
+                  <div class="card-subtitle text-muted">{{post.edited | date:'medium'}}</div>
+                </div>
+            </div>
+
+            <div class="card-text mt-4">{{post.content}}</div>
+        </div>
+        
+        <img *ngIf="post.img_link" class="card-img-bottom p-2" [src]=post.img_link alt="Card image" style="width:100%" />
+    </div>
+    <!-- end of card -->
+</div>
+<div class="info-box" (click)="loadMore()">{{endmessage}}</div>

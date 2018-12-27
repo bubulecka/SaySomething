@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { SpaceService } from "../services/space.service";
+import { SpaceService } from "../services/space-service/space.service";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    if (this.authService.getLoggedInState()) this.router.navigate(['']);
+    if (this.authService.getLoggedInState()) this.router.navigate([''], {replaceUrl:true});
     else this.setUpSpace();
   }
   

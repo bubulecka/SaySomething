@@ -1,0 +1,20 @@
+.info-box {
+    background-blend-mode: darken;
+    background-color: #d1d1d181;
+    /* border: 1px solid red; */
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+}
+.center-div{
+    /* magic is in the min-* */
+    min-width: 100vh;
+    /* container takes up max width */
+    display: flex;
+    align-items: center;
+}
+.center-inner-div{
+    margin: 0 auto;
+}
