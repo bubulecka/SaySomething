@@ -1,0 +1,35 @@
+CREATE DATABASE angular_backend DEFAULT CHARACTER SET utf8;
+-- order of edited/created is important!
+CREATE TABLE Users(
+    user_id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(128) UNIQUE NOT NULL,
+    password VARCHAR(128) NOT NULL,
+	img_link VARCHAR(128),
+	realname VARCHAR(128),
+	email VARCHAR(128),
+    edited TIMESTAMP,
+	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    PRIMARY KEY(user_id)
+);
+-- order of edited/created is important!
+CREATE TABLE posts(
+    post_id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    creator_id INTEGER NOT NULL,
+    likes INTEGER DEFAULT 0,
+    img_link VARCHAR(128),
+    content TEXT NOT NULL,
+    edited TIMESTAMP,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	
+    PRIMARY KEY(post_id),
+    FOREIGN KEY(creator_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- some optional starter data 
+INSERT INTO `users` (`username`, `password`, `img_link`) VALUES ('test', '$2y$12$.iQBBl/W6rHFpip/CKyu2eFOmydLWCWQNTsJHD1SmqpGtIaX498aS', 'https://robohash.org/test.png?size=100x100&set=set4');
+INSERT INTO `users` (`username`, `password`, `img_link`) VALUES ('anon', '$2y$12$QkcLVq/UZmS8kZ0ViovCgeT3JLUErlbWNGsOBHbmHekiwVyKjVGE.', 'https://robohash.org/anon.png?size=100x100&set=set4');
+
+INSERT INTO `posts` (`creator_id`, `content`) VALUES ('1', 'The flier should feel like a warm handshake can you make it stand out more?');
+INSERT INTO `posts` (`creator_id`, `content`) VALUES ('2', 'What is a hamburger menu we have big contacts we will promote you can you punch up the fun level on these icons can you make it pop.');
+INSERT INTO `posts` (`creator_id`, `content`) VALUES ('1', 'Can you make pink a little more pinkish thanks for taking the time to make the website, but i already made it in wix, anyway, you are the designer, you know what to do this red is too red.');
