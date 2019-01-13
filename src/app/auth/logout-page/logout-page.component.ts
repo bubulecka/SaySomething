@@ -12,7 +12,7 @@ export class LogoutPageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.doLogout().then((response) => {
+    this.authService.manualLogout().then((response) => {
       this.router.navigate(['login']);
     }, (error) => {
       this.router.navigate([''], {replaceUrl: true});

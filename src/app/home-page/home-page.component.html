@@ -8,7 +8,7 @@
             <div class="col-md-10 center-inner-div">
                 <h1 class="display-4">SaySomething</h1>
 
-                <img *ngIf="media=='image'" class="img img-fluid" [src]=mediaUrl>
+                <img *ngIf="media=='image'" class="img-nasa" [src]=mediaUrl>
                 <iframe *ngIf="media=='video'" width="560" height="315" [src]=mediaUrl frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 <div class="text-info">{{mediaTitle}}</div>
                 <div *ngIf="mediaTitle!=''" class="text-info">Astronomy Picture of the Day by <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank" rel="noopener">NASA</a></div>
