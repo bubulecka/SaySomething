@@ -1,4 +1,5 @@
 export interface PostsByToken {
+    "auth": boolean,
     "response": boolean,
     "data": {
         "creator_name": string,

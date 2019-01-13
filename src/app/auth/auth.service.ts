@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthToken } from './auth-token';
 import { AvailableToken } from './available-token';
 import { ProfileToken } from '../private/profile/profile-token';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -44,7 +45,7 @@ export class AuthService {
     localStorage.removeItem("profile-token");
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   checkAvailableUsername = (user: string): Promise<boolean> =>
   {
@@ -133,7 +134,8 @@ export class AuthService {
     return promise;
   }
 
-  doLogout() : Promise<boolean> {
+  // for the logout page
+  manualLogout() : Promise<boolean> {
 
     // in any case, remove session
     this.removeSessionState();
@@ -158,6 +160,27 @@ export class AuthService {
 
     return promise;
   }
+
+  // if there isnt a logout page
+  autoLogout() 
+  {
+    // in any case, remove session
+    this.removeSessionState();
+
+    this.http.post('http://localhost/backend-demo/auth_logout.php', { withCredentials: true })
+    .toPromise()
+    .then( 
+      (response) => {
+          //var answer = response as AuthToken;
+          this.router.navigate(['login']);
+        },
+        (error) => {console.log("doTheLogout() promise error")}
+    )
+    .catch((e: HttpErrorResponse) => {
+      console.log("No connection to the server detected?");
+    });
+  }
+
 }
 
 //const options = { params: new HttpParams() };

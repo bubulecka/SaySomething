@@ -25,7 +25,14 @@ export class PostsControlService {
         this.http.get('http://localhost/backend-demo/posts_view.php', {withCredentials: true})
         .toPromise()
         .then( (response) => {
-          resolve(response as PostsToken)
+          //resolve(response as PostsToken);
+          let token = response as PostsToken;
+          if (token.auth == true) {
+            resolve(token);
+          }
+          else {
+            this.authService.autoLogout();
+          }
         }, (error) => { reject(error); })
         .catch((e: HttpErrorResponse) => {reject("Something went wrong")})
     })
@@ -40,7 +47,14 @@ export class PostsControlService {
         this.http.get('http://localhost/backend-demo/posts_view.php?from='+from, {withCredentials: true})
         .toPromise()
         .then( (response) => {
-          resolve(response as PostsToken)
+          //resolve(response as PostsToken);
+          let token = response as PostsToken;
+          if (token.auth == true) {
+            resolve(token);
+          }
+          else {
+            this.authService.autoLogout();
+          }
         }, (error) => { reject(error); })
         .catch((e: HttpErrorResponse) => {reject("Something went wrong")})
     })
@@ -74,7 +88,14 @@ export class PostsControlService {
     .toPromise()
     .then(
       (response) => {
-        this.emitNewPost(response as PostsToken);
+        let token = response as PostsToken;
+        console.log("Token auth="+token.auth+" true=="+token.auth);
+        if (token.auth == true) {
+          this.emitNewPost(token);
+        }
+        else {
+          this.authService.autoLogout();
+        }
       }, (error) => {})
       .catch((e: HttpErrorResponse) => {})
   }

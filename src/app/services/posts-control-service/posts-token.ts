@@ -1,4 +1,5 @@
 export interface PostsToken {
+    "auth": boolean,
     "response": boolean,
     "data": Array<
         {

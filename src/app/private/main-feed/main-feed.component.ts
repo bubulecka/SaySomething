@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SearchUsersService } from '../../services/search-users-service/search-users.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-main-feed',
@@ -11,7 +12,7 @@ export class MainFeedComponent implements OnInit {
   searchResults = [];
   partial = "";
 
-  constructor(private searchService: SearchUsersService) { }
+  constructor(private searchService: SearchUsersService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -30,7 +31,9 @@ export class MainFeedComponent implements OnInit {
       console.log(JSON.stringify(response));
       //$('#searchinput').click();
     })
-    
   }
 
+  DoTheLogout() {
+    this.authService.autoLogout();
+  }
 }
